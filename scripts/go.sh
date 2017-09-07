@@ -1,19 +1,34 @@
 #!/bin/bash
-# Go to (5,0) and turn
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.7, right: 0.7}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.6, right: 0.6}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -0.4, right: 0.4}'
+# Go to starting point
 
-# Go to (5,5) and turn
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.7, right: 0.7}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.6, right: 0.6}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -0.4, right: 0.4}'
+# Turn 180 degrees
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -0.8, right: 0.8}'
 
-# Go to (0,5) and turn
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.7, right: 0.7}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.6, right: 0.6}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -0.4, right: 0.4}'
+# Drive forward sufficiently to pass the bouys
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
 
-# Go to (0,0)
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.7, right: 0.7}'
-rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.5, right: 0.5}'
+# Turn right
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.4, right: -0.4}'
+
+# Drive to center of bouys (but still behind line)
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+
+# Turn right (now facing the travel path)
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: 0.4, right: -0.4}'
+
+# Back up to ensure we hit top speed before starting line
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -1, right: -1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -1, right: -1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -1, right: -1}'
+rostopic pub -1 \cmd_drive kingfisher_msgs/Drive  '{left: -1, right: -1}'
+
+# Zoom forward with full speed without stopping after 3 seconds
+rostopic pub -r 10 \cmd_drive kingfisher_msgs/Drive  '{left: 1, right: 1}'
+
+
